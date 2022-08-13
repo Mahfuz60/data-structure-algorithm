@@ -29,7 +29,9 @@ int main()
   for (int i = 0; i < n; i++)
 
   {
-    for (int j =0; j < n -i-1; j++)
+    int flag = 0;
+    cout << "Iteration No:" << i << endl;
+    for (int j = 0; j < n - i - 1; j++)
     {
       if (arr[j] > arr[j + 1]) // ascending order(arr[j] > arr[j+1]) and desending order:(arr[j] < arr[j+1])
       {
@@ -37,11 +39,16 @@ int main()
         int temp = arr[j];
         arr[j] = arr[j + 1];
         arr[j + 1] = temp;
+        flag = 1;
 
         // or
         //  swap(arr[j], arr[j+1]);
       }
+      printArray(arr, n);
     }
+    cout << endl;
+    if (flag == 0)
+      break;
   }
   cout << "After sort" << endl;
   printArray(arr, n);
