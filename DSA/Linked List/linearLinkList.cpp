@@ -6,7 +6,32 @@ class Node
 public:
   int value;
   Node *Next;
+  // constructor creation
+  Node(int val)
+  {
+    value = val;
+    Next = NULL;
+  }
 };
+
+// Node Insertion
+void insertAtTrail(Node *&head, int val)
+{
+  Node *newNode = new Node(val);
+  if (head == NULL)
+  {
+    head = newNode;
+    return;
+  }
+
+  Node *temp = head;
+  while (temp->Next != NULL)
+  {
+    temp = temp->Next;
+  }
+  temp->Next = newNode;
+}
+// display function
 void linkDisplay(Node *head)
 {
   while (head != NULL)
@@ -16,30 +41,29 @@ void linkDisplay(Node *head)
     {
       cout << "->";
     }
-    head = head->Next; 
+    head = head->Next;
   }
 }
 
 int main()
 {
-
-  Node *head = new Node();
-  Node *second = new Node();
-  Node *third = new Node();
-  Node *fourth = new Node();
-  Node *fifth = new Node();
-
-  head->value = 1;
-  second->value = 4;
-  third->value = 5;
-  fourth->value = 8;
-  fifth->value = 9;
-
-  head->Next = second;
-  second->Next = third;
-  third->Next = fourth;
-  fourth->Next = fifth;
-  fifth->Next = NULL;
+  Node *head = NULL;
+  // insertAtTrail(head, 1);
+  // insertAtTrail(head, 5);
+  // insertAtTrail(head, 8);
+  // insertAtTrail(head, 9);
+  // insertAtTrail(head, 12);
+  int n;
+  char choice = 'Y';
+  
+  while (toupper(choice) == 'Y')
+  {
+    cout << "Enter the value:";
+    cin >> n;
+    insertAtTrail(head, n);
+    cout << "Do you Want to Continue(Y/N):";
+    cin >> choice;
+  }
 
   linkDisplay(head);
 
