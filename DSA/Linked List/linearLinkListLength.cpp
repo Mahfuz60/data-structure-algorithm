@@ -13,6 +13,10 @@ public:
     Next = NULL;
   }
 };
+void insertAtTail(Node *&head, int val);
+void insertAtHead(Node *&head, int val);
+void linkDisplay(Node *n);
+int lengthCount(Node *&head);
 
 // Node Insertion Tail
 void insertAtTail(Node *&head, int val)
@@ -57,6 +61,18 @@ void linkDisplay(Node *n)
        << endl;
 }
 
+// Liner LinkList Calculate Length
+int lengthCount(Node *&head)
+{
+  int count = 0;
+  Node *temp = head;
+  while (temp != NULL)
+  {
+    temp = temp->Next;
+    count++;
+  }
+  return count;
+}
 int main()
 {
   Node *head = NULL;
@@ -88,16 +104,15 @@ int main()
     default:
       break;
     }
-    // if (choice == 1)
-    //   insertAtHead(head, value);
-    // else if (choice == 2)
-    //   insertAtTail(head, value);
 
     cout << "Next Choice:";
     cin >> choice;
   }
 
+  cout << "Linked List:" << endl;
   linkDisplay(head);
+
+  cout << "Count of Link List Length:" << lengthCount(head) << endl;
 
   return 0;
 }
