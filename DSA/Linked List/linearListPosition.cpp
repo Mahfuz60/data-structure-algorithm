@@ -6,7 +6,7 @@ class Node
 public:
   int value;
   Node *Next;
-  // constructor creation
+  // constructor creation 
   Node(int val)
   {
     value = val;
