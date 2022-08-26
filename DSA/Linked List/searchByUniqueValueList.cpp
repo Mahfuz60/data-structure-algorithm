@@ -25,6 +25,11 @@ int lengthCount(Node *&head);
 void insertAtSpecificPosition(Node *&head, int pos, int val);
 int searchByUniqueValue(Node *&head, int key);
 void searchByDuplicateValue(Node *&head, int key);
+Test searchByValueDuplicateReturn(Node *&head, int key);
+void insertionAfterSpecificValue(Node *&head, int position, int value);
+void deletionAtHead(Node *&head);
+void deletionSpecificPosition(Node *&head, int Position);
+void deletionByUniqueValue(Node *&head, int Position);
 
 // Node Insertion at Tail
 void insertAtTail(Node *&head, int val)
@@ -180,6 +185,103 @@ Test searchByValueDuplicateReturn(Node *&head, int key)
   T.position[0] = k;
   return T;
 }
+void insertionAfterSpecificUniqueValue(Node *&head, int searchValue, int value)
+{
+  // step-1;search the position of searchValue
+  int position;
+  position = searchByUniqueValue(head, searchValue);
+  // step-2:insert the value at the postion+1
+  insertAtSpecificPosition(head, position + 1, value);
+}
+void deletionAtHead(Node *&head)
+{
+  Node *temp = head;
+  if (temp != NULL)
+  {
+    head = temp->Next;
+    delete temp;
+  }
+  else
+  {
+    cout << "There is no value in this Linked list" << endl;
+  }
+}
+void deletionAtTail(Node *&head)
+{
+  Node *temp = head;
+  if (temp != NULL && temp->Next != NULL)
+  {
+    while (temp->Next->Next != NULL)
+    {
+      temp = temp->Next;
+    }
+    Node *delNode = temp->Next;
+    temp->Next = NULL;
+    delete delNode;
+  }
+  else
+  {
+    // Head is NULL
+    if (temp == NULL)
+      cout << "There is no value in this Linked list" << endl;
+    // Head is Tail
+    else
+      deletionAtHead(head);
+  }
+}
+void deletionSpecificPosition(Node *&head, int Position)
+{
+  Node *temp = head;
+  if (Position <= lengthCount(head))
+  {
+    if (Position == 1)
+    {
+      deletionAtHead(head);
+    }
+    else if (Position == lengthCount(head))
+    {
+      deletionAtTail(head);
+    }
+    else
+    {
+      int i = 1;
+      while (i < Position - 1)
+      {
+        temp = temp->Next;
+        i++;
+      }
+      Node *delNode = temp->Next;
+      temp->Next = delNode->Next;
+
+      delete delNode;
+    }
+  }
+  else
+  {
+    // Position is Out of range
+    // if (Position > lengthCount(head))
+    cout << "Position is out bound" << endl;
+    // Link List is NULL
+
+    // else
+    //   cout << "There is Value in this Linked List" << endl;
+  }
+}
+void deletionByUniqueValue(Node *&head, int value)
+{
+  // find the position of this value
+  int position;
+  position = searchByUniqueValue(head, value);
+  // delete the node at this position value
+  if (position == -1)
+  {
+    cout << "Value is not found in this link List" << endl;
+  }
+  else
+  {
+    deletionSpecificPosition(head, position);
+  }
+}
 int main()
 {
   Node *head = NULL;
@@ -191,6 +293,11 @@ int main()
        << "Choice 3:Insersion at Specific Position" << endl
        << "Choice 4:Search By Unique Value" << endl
        << "Choice 5:Search By Duplicate Value" << endl
+       << "Choice 6:Insertion after specific value(unique value)" << endl
+       << "Choice 7:Deletion at Head" << endl
+       << "Choice 8:Deletion at Tail" << endl
+       << "Choice 9:Deletion at Specific Position" << endl
+       << "Choice 10:Deletion at Unique Value" << endl
        << "Choice 0:Exit" << endl
        << endl
        << endl;
@@ -268,6 +375,42 @@ int main()
       //   cout << "The Number is not yet in this List" << endl;
       // }
 
+      break;
+    case 6:
+      cout << "Enter the value search:";
+      int searchValue;
+      cin >> searchValue;
+      cout << "Enter the value Insert:";
+      cin >> value;
+      insertionAfterSpecificUniqueValue(head, searchValue, value);
+
+      break;
+    case 7:
+      deletionAtHead(head);
+
+      break;
+    case 8:
+      deletionAtTail(head);
+
+      break;
+    case 9:
+      if (head == NULL)
+      {
+        cout << "There is No value in this Link List" << endl;
+        break;
+      }
+      cout << "Enter the Desired Position:";
+      cin >> position;
+      deletionSpecificPosition(head, position);
+      cout << endl;
+      linkDisplay(head);
+
+      break;
+    case 10:
+      cout << "deletion of this Unique value:";
+      int deleteValue;
+      cin >> deleteValue;
+      deletionByUniqueValue(head, deleteValue);
       break;
 
     default:
