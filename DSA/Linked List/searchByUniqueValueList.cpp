@@ -13,6 +13,11 @@ public:
     Next = NULL;
   }
 };
+struct Test
+{
+  int position[1000];
+};
+
 void insertAtTail(Node *&head, int val);
 void insertAtHead(Node *&head, int val);
 void linkDisplay(Node *n);
@@ -152,6 +157,29 @@ void searchByDuplicateValue(Node *&head, int key)
     cout << endl;
   }
 }
+// search Value By Duplicate Return
+Test searchByValueDuplicateReturn(Node *&head, int key)
+{
+  Node *temp = head;
+  Test T;
+  int k = 1;
+
+  int count = 1;
+  while (temp != NULL)
+  {
+    if (temp->value == key)
+    {
+
+      T.position[k] = count;
+      k++;
+    }
+
+    temp = temp->Next;
+    count++;
+  }
+  T.position[0] = k;
+  return T;
+}
 int main()
 {
   Node *head = NULL;
@@ -208,7 +236,27 @@ int main()
     case 5:
       cout << "Enter the search Duplicate value:";
       cin >> value;
-      searchByDuplicateValue(head, value);
+      // searchByDuplicateValue(head, value);
+      Test T;
+      T = searchByValueDuplicateReturn(head, value);
+      if (T.position[0] == 1)
+      {
+        cout << "The search value Not yet in this list" << endl;
+      }
+      else
+      {
+        int size = T.position[0];
+        cout << "The Value Found at this Position:";
+        for (int i = 1; i < size; i++)
+        {
+          cout << T.position[i];
+          if (i < size - 1)
+          {
+            cout << ",";
+          }
+        }
+        cout << endl;
+      }
 
       // position = searchByDuplicateValue(head, value);
       // if (position != -1)
