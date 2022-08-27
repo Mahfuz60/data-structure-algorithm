@@ -7,13 +7,13 @@ class Student
 public:
   int rollNumber;
   string name;
-  int phone;
+  string phone;
   string section;
   int attendance;
   Student *Next;
 
   // create a Node Constructor
-  Student(int roll, string nam, int phon, string sec, int attend)
+  Student(int roll, string nam, string phon, string sec, int attend)
   {
     rollNumber = roll;
     name = nam;
@@ -23,9 +23,13 @@ public:
     Next = NULL;
   }
 };
+void insertAtStudent(Student *&head, int roll, string name, string phone, string section, int attend);
+void printDisplay(Student *&head);
+void searchAtStudent(Student *&head, int roll);
+void deleteAtStudent(Student *&head, int roll);
 
 // insert a student head
-void insertAtStudent(Student *&head, int roll, string name, int phone, string section, int attend)
+void insertAtStudent(Student *&head, int roll, string name, string phone, string section, int attend)
 {
 
   Student *newNode = new Student(roll, name, phone, section, attend);
@@ -51,15 +55,60 @@ void searchAtStudent(Student *&head, int roll)
   {
     if (temp->rollNumber == roll)
     {
-      cout << "Searching Student Roll Number:" << roll << endl;
+      cout << "Roll Number:" << roll << endl;
       cout << "Name:" << temp->name << endl;
-    }
-    else
-    {
-      cout << "Student Roll Number is not found!";
+      cout << "phone:" << temp->phone << endl;
+      cout << "section:" << temp->section << endl;
+      return;
     }
     temp = temp->Next;
   }
+  cout << "Student Roll is not found!" << endl;
+}
+
+void deleteAtStudent(Student *&head, int roll)
+{
+  Student *temp1 = head;
+  Student *temp2 = head;
+  while (temp1 != NULL)
+  {
+    if (temp1->rollNumber == roll)
+    {
+      if (temp1 == temp2)
+      {
+        head = head->Next;
+        free(temp1);
+      }
+      else
+      {
+        temp2->Next = temp1->Next;
+      }
+      return;
+    }
+    temp2 = temp1;
+    temp1 = temp1->Next;
+  }
+  cout << "Not found this Student" << endl;
+}
+void updateAtStudent(Student *&head, int roll)
+{
+  Student *temp = head;
+  while (temp != NULL)
+  {
+    if (temp->rollNumber == roll)
+    {
+      cout << "Update data" << endl;
+      cout << "update name:";
+      cin >> temp->name;
+      cout << endl;
+      cout << "update section:";
+      cin >> temp->section;
+      return;
+    }
+    temp = temp->Next;
+  }
+
+  cout << "Not found Student!";
 }
 
 // display Function
@@ -87,13 +136,15 @@ int main()
   // Student Details Data
   int roll;
   string name;
-  int phone;
+  string phone;
   string section;
   int attend;
 
   int choice;
   cout << "choice-1:Insert a Student at Head" << endl
        << "choice-2:Search a Student" << endl
+       << "choice-3:Delete a Student" << endl
+       << "choice-4:Update a Student" << endl
        << "choice-0:Exit" << endl
        << endl
        << endl;
@@ -121,18 +172,28 @@ int main()
 
       break;
     case 2:
-      cout << "Enter your student Roll Number:";
-      int searchRoll;
-      cin >> searchRoll;
-      searchAtStudent(head, searchRoll);
+      cout << "Student searching Roll Number:";
+      cin >> roll;
+      searchAtStudent(head, roll);
+      break;
+    case 3:
+      cout << "Delete a Student roll Number:";
+      cin >> roll;
+      deleteAtStudent(head, roll);
 
+      break;
+    case 4:
+      cout << "UpdateStudent roll Number:";
+      cin >> roll;
+      updateAtStudent(head, roll);
+
+      break;
     default:
       break;
     }
     cout << "Next Choice:";
     cin >> choice;
-    cout << endl
-         << endl;
+    cout << endl;
   }
 
   printDisplay(head);
