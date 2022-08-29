@@ -282,12 +282,35 @@ void deletionByUniqueValue(Node *&head, int value)
     deletionSpecificPosition(head, position);
   }
 }
+// reverse Link list Non Recursive
+Node *reverseNonRecursiveLinkList(Node *&head)
+{
+  Node *prev = NULL;
+  Node *current = head;
+  if (head == NULL)
+  {
+    cout << "The Link List is Empty!" << endl;
+    return head;
+  }
+
+  Node *next = head->Next;
+
+  while (true)
+  {
+    current->Next = prev;
+    prev = current;
+    current = next;
+    if (current == NULL)
+      break;
+    next = next->Next;
+  }
+  return prev;
+}
 int main()
 {
   Node *head = NULL;
   int value;
-  // Choice 1:Insersion at Head
-  // Choice 2:Insersion at Trail
+
   cout << "Choice 1:Insersion at Head" << endl
        << "Choice 2:Insersion at Trail" << endl
        << "Choice 3:Insersion at Specific Position" << endl
@@ -298,6 +321,7 @@ int main()
        << "Choice 8:Deletion at Tail" << endl
        << "Choice 9:Deletion at Specific Position" << endl
        << "Choice 10:Deletion at Unique Value" << endl
+       << "Choice 11:Reverse Link List(Non Recursive)" << endl
        << "Choice 0:Exit" << endl
        << endl
        << endl;
@@ -364,17 +388,6 @@ int main()
         }
         cout << endl;
       }
-
-      // position = searchByDuplicateValue(head, value);
-      // if (position != -1)
-      // {
-      //   cout << "The Number is at Position: " << position << endl;
-      // }
-      // else
-      // {
-      //   cout << "The Number is not yet in this List" << endl;
-      // }
-
       break;
     case 6:
       cout << "Enter the value search:";
@@ -412,10 +425,16 @@ int main()
       cin >> deleteValue;
       deletionByUniqueValue(head, deleteValue);
       break;
+    case 11:
+
+      head = reverseNonRecursiveLinkList(head);
+
+      cout << endl;
 
     default:
       break;
     }
+  
 
     cout << "Next Choice:";
     cin >> choice;
