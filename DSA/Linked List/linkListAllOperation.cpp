@@ -306,6 +306,76 @@ Node *reverseNonRecursiveLinkList(Node *&head)
   }
   return prev;
 }
+int findingMidMethod(Node *&head)
+{
+  // case-1: Head is empty
+  if (head == NULL)
+  {
+    return -1;
+  }
+  Node *slow = head;
+  Node *fast = head;
+  while (fast != NULL && fast->Next != NULL)
+  {
+    slow = slow->Next;
+    fast = fast->Next->Next;
+  }
+  return slow->value;
+}
+void makeCycleMethod(Node *&head, int pos)
+{
+  Node *temp = head;
+  Node *cycleNode;
+  int count = 1;
+  while (temp->Next != NULL)
+  {
+    if (count == pos)
+    {
+      cycleNode = temp;
+    }
+
+    temp = temp->Next;
+    count++;
+  }
+  temp->Next = cycleNode;
+}
+bool detectCycle(Node *&head)
+{
+  Node *fast = head;
+  Node *slow = head;
+  while (fast != NULL && fast->Next != NULL)
+  {
+    slow = slow->Next;
+    fast = fast->Next->Next;
+    // check Cycle
+    if (slow->Next == fast->Next)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+void removeCycle(Node *&head)
+{
+  Node *fast = head;
+  Node *slow = head;
+  // step-1:fast=slow
+  do
+  {
+    slow = slow->Next;
+    fast = fast->Next->Next;
+  } while (fast != slow);
+  // step-2:Re initailize of head
+  fast = head;
+  // step-3:fast->next=slow->Next
+  while (fast->Next != slow->Next)
+  {
+    slow = slow->Next;
+    fast = fast->Next;
+  }
+  // step-4:
+  slow->Next = NULL;
+}
 int main()
 {
   Node *head = NULL;
@@ -322,6 +392,10 @@ int main()
        << "Choice 9:Deletion at Specific Position" << endl
        << "Choice 10:Deletion at Unique Value" << endl
        << "Choice 11:Reverse Link List(Non Recursive)" << endl
+       << "choice-12:Finding the Mid(slow-fast Pointer Method)" << endl
+       << "choice-13: Make a cycle in nth Position" << endl
+       << "choice -14:Detect a Cycle in this List" << endl
+       << "chocie-15: Remove a Cycle(if any)" << endl
        << "Choice 0:Exit" << endl
        << endl
        << endl;
@@ -430,11 +504,57 @@ int main()
       head = reverseNonRecursiveLinkList(head);
 
       cout << endl;
+      break;
+
+    case 12:
+      int mid;
+      mid = findingMidMethod(head);
+      if (mid == -1)
+      {
+        cout << "The List is empty!" << endl;
+      }
+      else
+      {
+
+        cout << "Mid Value is:" << mid << endl;
+      }
+
+      break;
+    case 13:
+      cout << "Enter the Desired Position:";
+      cin >> position;
+      makeCycleMethod(head, position);
+      break;
+    case 14:
+      bool cycleStatus;
+      cycleStatus = detectCycle(head);
+      if (cycleStatus == true)
+      {
+        cout << "There is a Cycle  in this list" << endl;
+      }
+      else
+      {
+        cout << "There is No cycle in this list" << endl;
+      }
+      break;
+
+    case 15:
+      cycleStatus = detectCycle(head);
+      if (cycleStatus == true)
+      {
+
+        removeCycle(head);
+        cout << "cycle is removed!" << endl;
+      }
+      else
+      {
+        cout << "There is No cycle in this list" << endl;
+      }
+      break;
 
     default:
       break;
     }
-  
 
     cout << "Next Choice:";
     cin >> choice;
