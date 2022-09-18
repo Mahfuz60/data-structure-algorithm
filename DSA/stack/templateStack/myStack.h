@@ -10,9 +10,9 @@ public:
   Node *next;
   Node *prev;
 
+  // constactor
   Node(N val)
   {
-
     value = val;
     next = NULL;
     prev = NULL;
@@ -95,7 +95,6 @@ public:
     if (top == NULL)
     {
       cout << "Stack Underflow |There is No element in Top" << endl;
-      
     }
     else
     {
