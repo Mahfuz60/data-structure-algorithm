@@ -25,7 +25,7 @@ int main()
     for (int j = 0; j < m; j++)
     {
       if (curr_Num == M_arr[i])
-      {
+      {     
         flag = 1;
       }
     }
