@@ -16,7 +16,7 @@ int main()
   for (int i = 0; i < m; i++)
   {
     cin >> M_arr[i];
-  } 
+  }
 
   for (int i = 0; i < n; i++)
   {
