@@ -25,7 +25,6 @@ class Queue
   Node<Q> *front;
   Node<Q> *rear;
 
-
 public:
   // constructor
   Queue()
@@ -36,7 +35,7 @@ public:
 };
 
 // enqueue --->push(val)
-void push( Q val)
+void push(Q val)
 {
 
   Node<Q> *newNode = new Node<Q>(val);
@@ -50,7 +49,7 @@ void push( Q val)
 
   rear->next = newNode;
   rear = rear->next;
-}
+};
 
 // dequeue---->pop()
 Q pop()
@@ -72,7 +71,7 @@ Q pop()
   chk = delNode->value;
   delete delNode;
   return chk;
-}
+};
 
 // peak---->front() and back()
 Q Front()
@@ -80,14 +79,14 @@ Q Front()
   Q chk;
   chk = front->value;
   return chk;
-}
+};
 
 Q Back()
 {
   Q chk;
   chk = rear->value;
   return chk;
-}
+};
 
 // empty--->empty()
 bool empty()
