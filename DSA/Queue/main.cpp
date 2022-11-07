@@ -2,11 +2,11 @@
 #include "MYQUEUE.h"
 using namespace std;
 
-typedef pair<char, int> mytype;
+typedef pair<char, int> myType;
 
 int main()
 {
-  Queue<mytype> q;
+  Queue<myType> q;
   int n;
   cin >> n;
   for (int i = 0; i < n; i++)
@@ -19,7 +19,7 @@ int main()
 
   while (!q.empty())
   {
-    mytype chk;
+    myType chk;
     chk = q.pop();
 
     cout << chk.first << "||" << chk.second << endl;
@@ -30,18 +30,18 @@ int main()
   if (!q.empty())
   {
 
-    mytype chk;
+    myType chk;
     chk = q.pop();
 
-    cout << chk.first << "|" << chk.second << endl;
+    cout << chk.first << "||" << chk.second << endl;
   }
 
   if (!q.empty())
   {
-    mytype chk;
+    myType chk;
     chk = q.pop();
 
-    cout << chk.first << "|" << chk.second << endl;
+    cout << chk.first << "||" << chk.second << endl;
   }
 
   return 0;
