@@ -6,7 +6,7 @@ bool balanceParentThesis(string s)
 {
 
   int n = s.size();
-  Stack<char> st;
+  Stack  <char> st;
   bool isBalanced = true;
   for (int i = 0; i < n; i++)
   {

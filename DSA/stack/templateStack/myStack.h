@@ -10,7 +10,7 @@ public:
   Node *next;
   Node *prev;
 
-  // constactor
+  // constructor
   Node(N val)
   {
     value = val;
