@@ -1,13 +1,20 @@
 #include <bits/stdc++.h>
-#include "myStack.h"
+#include "MYSTACK.h"
 using namespace std;
 
 bool balanceParentThesis(string s)
 {
+  Stack<char> st;
 
   int n = s.size();
-  Stack  <char> st;
+
   bool isBalanced = true;
+
+  if (s[0] == ')' || s[0] == '}' || s[0] == ']')
+  {
+    return false;
+  }
+
   for (int i = 0; i < n; i++)
   {
 
@@ -56,14 +63,31 @@ bool balanceParentThesis(string s)
       }
     }
   }
+
+  if (!st.empty())
+  {
+
+    isBalanced = false;
+  }
+
+  return isBalanced;
 };
+
+
 
 int main()
 {
 
   string chk;
   cin >> chk;
-  balanceParentThesis(chk);
+  if (balanceParentThesis(chk))
+  {
+    cout << "YES";
+  }
+  else
+  {
+    cout << "NO";
+  }
 
   return 0;
 }

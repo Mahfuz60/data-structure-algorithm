@@ -11,7 +11,7 @@ class person
   float salary;
 
 public:
-  // null constractor
+  // null constructor
   person()
   {
     name = "";
@@ -27,7 +27,7 @@ public:
   {
     this->salary = salary;
   }
-  // parse by value constactor
+  // parse by value constructor
   person(string name, float salary)
   {
     setName(name);
