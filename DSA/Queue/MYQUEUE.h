@@ -1,102 +1,110 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
-// create Node
 template <typename N>
 class Node
 {
+
 public:
   N value;
   Node *next;
+  Node *prev;
 
-  // constructor
   Node(N val)
   {
     value = val;
     next = NULL;
+    prev = NULL;
   }
 };
-
-// create Queue
-template <typename Q>
-class Queue
+// Stack <float> st;
+template <typename S>
+class Stack
 {
 
-  Node<Q> *front;
-  Node<Q> *rear;
+  Node<S> *head;
+  Node<S> *top;
+  int count = 0;
 
 public:
-  // constructor
-  Queue()
+  Stack()
   {
-    front = NULL;
-    rear = NULL;
-  }
-};
-
-// enqueue --->push(val)
-void push(Q val)
-{
-
-  Node<Q> *newNode = new Node<Q>(val);
-  if (front == NULL)
-  {
-
-    front = newNode;
-    rear = newNode;
-    return;
+    head = NULL;
+    top = NULL;
   }
 
-  rear->next = newNode;
-  rear = rear->next;
-};
-
-// dequeue---->pop()
-Q pop()
-{
-  Q chk;
-  if (rear == NULL)
+  // PUSH
+  void push(S val)
   {
-    cout << "Queue is underflow and There is no element in queue" << endl;
+
+    Node<S> *newNode = new Node<S>(val);
+
+    if (head == NULL)
+    {
+      head = top = newNode;
+      count++;
+      return;
+    }
+
+    top->next = newNode;
+    newNode->prev = top;
+    top = newNode;
+    count++;
+  }
+  // POP
+
+  S pop()
+  {
+    Node<S> *delNode;
+    delNode = top;
+    S chk;
+    if (head == NULL)
+    { // There is No Element in the Stack
+      cout << "Stack Underflow " << endl;
+      return chk;
+    }
+
+    if (top == head) // There is only 1 element
+    {
+      head = top = NULL;
+    }
+    else // There is More than 1 element
+    {
+      top = delNode->prev;
+      top->next = NULL;
+    }
+
+    chk = delNode->value;
+    delete delNode;
+    count--;
     return chk;
   }
 
-  Node<Q> *delNode;
-  delNode = front;
-  front = front->next;
-  if (front == NULL)
+  // EMPTY
+  bool empty()
   {
-    rear = NULL;
+    if (head == NULL)
+      return true;
+    else
+      return false;
   }
-  chk = delNode->value;
-  delete delNode;
-  return chk;
-};
-
-// peak---->front() and back()
-Q Front()
-{
-  Q chk;
-  chk = front->value;
-  return chk;
-};
-
-Q Back()
-{
-  Q chk;
-  chk = rear->value;
-  return chk;
-};
-
-// empty--->empty()
-bool empty()
-{
-  if (front == NULL && rear == NULL)
+  // SIZE
+  int size()
   {
-    return true;
+    return count;
   }
-  else
+  // TOP
+  S Top()
   {
-    return false;
+    S chk;
+    if (top == NULL)
+    {
+      cout << "Stack Underflow | There is no Element in Top " << endl;
+    }
+    else
+      chk = top->value;
+
+    return chk;
   }
-}
+};
