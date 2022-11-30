@@ -36,7 +36,7 @@ void printTree(treeNode* root,int level){
     if(root!=NULL){
         return;
     }
-    cout<<"Root"<<root<<endl;
+    cout<<"Root :"<<root->data<<endl;
 
 
 
