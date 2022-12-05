@@ -19,7 +19,42 @@ class treeNode{
 void printTree(treeNode* root,int level);
 void spacePrint(int level);
 
+/*InOrder method(left-root-right) */
+void inOrder(treeNode *root,string &chk){
+    if(root==NULL) return;
+    inOrder(root->leftChild,chk);
+    chk+=to_string(root->data);
+    inOrder(root->rightChild,chk);
+}
+/*preOrder method(root-left-right) */
+void preOrder(treeNode *root,string &chk){
+    if(root==NULL) return;
+
+    chk+=to_string(root->data);
+    preOrder(root->leftChild,chk);
+   preOrder(root->rightChild,chk);
+}
+/*postOrder method(left-right-root) */
+void postOrder(treeNode *root,string &chk){
+    if(root==NULL) return;
+
+   postOrder(root->leftChild,chk);
+   postOrder(root->rightChild,chk);
+   chk+=to_string(root->data);
+}
+
 /*
+Enter your Input:9
+0 1 2
+1 3 4
+2 5 6
+3 -1 -1
+4 -1 -1
+5 7 8
+6 -1 -1
+7 -1 -1
+8 -1 -1
+
 Root:0
 Left:
         Root:1
@@ -32,7 +67,7 @@ Left:
                   left:7
                   right:8
             Right:6
-     */
+*/
 
 
 void printTree(treeNode* root,int level){
@@ -92,11 +127,34 @@ int main(){
         allNodes[i]->rightChild=allNodes[right];
     }
 
-
-
-    }
+}
 
 printTree(allNodes[0],0);
+
+
+/*inOrder Traversal*/
+string  inOrderTraversal=" ";
+inOrder(allNodes[0],inOrderTraversal);
+cout<<"inOrderTraversal:"<<inOrderTraversal<<endl;
+
+/*preOrder Traversal*/
+string preOrderTraversal=" ";
+preOrder(allNodes[0],preOrderTraversal);
+cout<<"preOrderTraversal:"<<preOrderTraversal<<endl;
+
+
+/*postOrder Traversal*/
+string postOrderTraversal=" ";
+postOrder(allNodes[0],postOrderTraversal);
+cout<<"postOrderTraversal:"<<postOrderTraversal<<endl;
+
+/*
+output:
+inOrderTraversal: 314075826
+preOrderTraversal: 013425786
+postOrderTraversal: 341785620
+
+*/
 
 
 
