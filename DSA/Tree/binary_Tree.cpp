@@ -108,48 +108,8 @@ void printTree(treeNode *root, int level)
     }
 }
 
-<<<<<<< HEAD
 void spacePrint(int level)
 {
-=======
-void levelOrder(treeNode*root,string &chk){
-    if(root==NULL){
-        return;
-    }
-    int level=0;
-    queue<treeNode*>q;
-
-    q.push(root);
-    q.push(NULL);
-
-    while(!q.empty()){
-    treeNode*chkNode=q.front();
-    q.pop();
-
-    if(chkNode!=NULL){
-            cout<<chkNode->data<<" ";
-            chk+=to_string(chkNode->data);
-
-
-            if(chkNode->leftChild!=NULL){
-                q.push(chkNode->leftChild);
-            }
-            if(chkNode->rightChild!=NULL){
-            q.push(chkNode->rightChild);
-            }
-
-}
-else{
-    if(!q.empty()){
-        q.push(NULL);
-    }
-}
-
-    }
-    cout<<endl;
-}
-
->>>>>>> 865136f01a2ed2654ec38abd16e91a4f5c7a045b
 
     for (int i = 0; i < level; i++)
     {
@@ -199,7 +159,6 @@ void levelOrder(treeNode *root, string &chk)
     cout << endl;
 }
 
-<<<<<<< HEAD
 int main()
 {
     int n;
@@ -259,43 +218,3 @@ int main()
 
     return 0;
 }
-=======
-/*printTree(allNodes[0],0);*/
-
-
-/*inOrder Traversal*/
-string  inOrderTraversal=" ";
-/*preOrder Traversal*/
-string preOrderTraversal=" ";
-/*postOrder Traversal*/
-string postOrderTraversal=" ";
-/*levelOrderTraversal*/
-string levelOrderTraversal=" ";
-
-
-inOrder(allNodes[0],inOrderTraversal);
-preOrder(allNodes[0],preOrderTraversal);
-postOrder(allNodes[0],postOrderTraversal);
-levelOrder(allNodes[0],levelOrderTraversal);
-
-/*
-cout<<"inOrderTraversal:"<<inOrderTraversal<<endl;
-cout<<"preOrderTraversal:"<<preOrderTraversal<<endl;
-cout<<"postOrderTraversal:"<<postOrderTraversal<<endl;
-
-*/
-cout<<"levelOrderTraversal:"<<levelOrderTraversal<<endl;
-
-
-
-/*
-output:
-inOrderTraversal: 314075826
-preOrderTraversal: 013425786
-postOrderTraversal: 341785620
-
-*/
-
-return 0;
-}
->>>>>>> 865136f01a2ed2654ec38abd16e91a4f5c7a045b
