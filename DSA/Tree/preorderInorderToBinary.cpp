@@ -96,11 +96,8 @@ void spacePrint(int level)
 
 /*
 9
-pre:
-0 1 3 4 2 5 7 8 6
-in:
-3 1 4 0 7 5 8 2 6
-
+0 1 3 4 2 5 7 8 6     //preorder
+3 1 4 0 7 5 8 2 6     //inorder
 
 0 1 2
 1 3 4
@@ -112,9 +109,8 @@ in:
 7 -1 -1
 8 -1 -1
 
-
-
 */
+
 int searchInOrder(int inOrder[], int current, int start, int end)
 {
   for (int i = start; i <= end; i++)
@@ -132,7 +128,7 @@ int searchInOrder(int inOrder[], int current, int start, int end)
 
 treeNode *buildTreePreIn(int preOrder[], int inOrder[], int start, int end)
 {
-  static  int id = 0;
+  static int id = 0;
   int current = preOrder[id];
   id++;
   treeNode* newNode=new treeNode(current);
