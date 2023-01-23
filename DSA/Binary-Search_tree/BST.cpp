@@ -42,10 +42,30 @@ void inOderTraversal(TreeNode *root, string &str)
   if (root == NULL)
     return;
   inOderTraversal(root->leftChild, str);
-  str += (to_string(root->value)+" ");
+  str += (to_string(root->value) + " ");
   inOderTraversal(root->rightChild, str);
 }
 
+TreeNode *searchBST(TreeNode *root, int value)
+{
+  if (root == NULL)
+    return NULL;
+  if (root->value == value)
+  {
+    cout<<root->value;
+    return root;
+  }
+  else if (value < root->value)
+  {
+    cout<<root->value<<"->";
+    searchBST(root->leftChild, value);
+  }
+  else
+  {
+    cout<<root->value<<"->";
+    searchBST(root->rightChild, value);
+  }
+}
 TreeNode *inOrderSuccessor(TreeNode *root)
 {
 }
@@ -65,6 +85,18 @@ int main()
   string traversal = "";
   inOderTraversal(root, traversal);
   cout << traversal;
+  cout << endl;
+
+  int key;
+  cin >> key;
+  if (searchBST(root, key) == NULL)
+  {
+    cout <<endl<< "Value does not exits in the BST";
+  }
+  else
+  {
+    cout <<endl<< "Value exits in The BST";
+  }
 
   return 0;
 }
