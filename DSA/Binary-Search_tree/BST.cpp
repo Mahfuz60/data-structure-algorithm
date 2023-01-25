@@ -66,8 +66,46 @@ TreeNode *searchBST(TreeNode *root, int value)
     searchBST(root->rightChild, value);
   }
 }
-TreeNode *inOrderSuccessor(TreeNode *root)
+TreeNode*inOderSuccesser(TreeNode*root){
+  TreeNode*current=root;
+  while(current->leftChild!=NULL){
+    current=current->leftChild;
+  }
+  return current;
+
+}
+TreeNode *deleteBST(TreeNode *root,int value)
 {
+  if(value<root->value){
+    root->leftChild=deleteBST(root->leftChild,value);
+
+  }else if(value>root->value){
+     root->rightChild=deleteBST(root->rightChild,value);
+
+  }else{
+    //implemantation of 3 cases
+    if(root->leftChild==NULL){ //case-1 and case-2
+      TreeNode*temp=root->rightChild;
+      free(root);
+      return temp;
+
+    }else if(root->rightChild==NULL){ //case -2
+      TreeNode*temp=root->leftChild;
+      free(root);
+      return temp;
+
+    }else{ //case-3
+      TreeNode*temp=inOderSuccesser(root->rightChild);
+      root->value=temp->value;
+      root->rightChild=deleteBST(root->rightChild,temp->value);
+
+    }
+    return root;
+
+  }
+
+  
+
 }
 
 int main()
@@ -89,14 +127,21 @@ int main()
 
   int key;
   cin >> key;
-  if (searchBST(root, key) == NULL)
-  {
-    cout <<endl<< "Value does not exits in the BST";
-  }
-  else
-  {
-    cout <<endl<< "Value exits in The BST";
-  }
+  // if (searchBST(root, key) == NULL)
+  // {
+  //   cout <<endl<< "Value does not exits in the BST";
+  // }
+  // else
+  // {
+  //   cout <<endl<< "Value exits in The BST";
+  // }
+
+  root=deleteBST(root,key);
+  string afterDelation = "";
+  inOderTraversal(root, afterDelation);
+  cout << afterDelation;
+  cout<<endl;
+
 
   return 0;
 }
