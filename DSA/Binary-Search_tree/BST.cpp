@@ -72,7 +72,7 @@ TreeNode*inOderSuccesser(TreeNode*root){
     current=current->leftChild;
   }
   return current;
-
+ 
 }
 TreeNode *deleteBST(TreeNode *root,int value)
 {
