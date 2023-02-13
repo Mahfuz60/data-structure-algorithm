@@ -31,12 +31,22 @@ void heafify(int arr[], int n, int current)
   }
 }
 
+// heapsort
+void heapSort(int arr[], int size)
+{
+  for (int i = size - 1; i >= 0; i--)
+  {
+    swap(arr[0], arr[i]);
+    heafify(arr, i, 0);
+  }
+}
+
 void printHeafify(int arr[], int size)
 {
   cout << endl;
   for (int i = 0; i < size; i++)
   {
-    cout << arr[i];
+    cout << arr[i] << " ";
   }
   cout << endl;
 }
@@ -48,7 +58,7 @@ int main()
   int arr[n];
   for (int i = 0; i < n; i++)
   {
-    cout << arr[i] << " ";
+    cin >> arr[i];
   }
   cout << endl;
   cout << "Before Heafify:";
@@ -64,6 +74,9 @@ int main()
   cout << endl;
 
   cout << "After Heafify:";
+  printHeafify(arr, n);
+heapSort(arr,n);
+  cout << "After the HeapSort:";
   printHeafify(arr, n);
 
   return 0;
