@@ -22,7 +22,9 @@ public:
 
   void printNeighbour(int chk)
   {
+
     cout << chk << ":";
+   
 
     for (auto i = adj[chk].begin(); i != adj[chk].end(); i++)
     {
@@ -30,12 +32,35 @@ public:
     }
     cout << endl;
   }
+  // Breadth First Search
+  void BFS(int source)
+  {
+    vector<bool> visited(V, false);
+    queue<int> Q;
+    visited[source] = true;
+    Q.push(source);
+    while (!Q.empty())
+    {
+      int u = Q.front();
+      cout << u << " ";
+      Q.pop();
+      for (auto element : adj[u])
+      {
+        int v = element.first;
+        if (visited[v] != true)
+        {
+          visited[v] = true;
+          Q.push(v);
+        }
+      }
+    }
+  }
 };
 
 int main()
 {
-  int V, E;
-  cin >> V >> E;
+  int V, E, source;
+  cin >> V >> E >> source;
   Graph grp(V);
   for (int i = 0; i < E; i++)
   {
@@ -50,12 +75,18 @@ int main()
     cout << endl;
   }
 
+  cout << endl
+       << endl;
+  grp.BFS(source);
+  cout << endl
+       << endl;
+
   return 0;
 }
 
-//Bi-Directional weighted graph
+// Bi-Directional weighted graph
 /*
-7 10
+7 10 0
 0 1 7
 0 2 1
 0 5 3
@@ -71,18 +102,18 @@ int main()
 
 // output
 /*
-0:(1 ,7)(2 ,1)(5 ,3) 
+0:(1 ,7)(2 ,1)(5 ,3)
 
-1:(0 ,7)(3 ,11)      
+1:(0 ,7)(3 ,11)
 
-2:(0 ,1)(5 ,8)(3 ,3) 
+2:(0 ,1)(5 ,8)(3 ,3)
 
 3:(1 ,11)(2 ,3)(6 ,1)
 
-4:(6 ,4)(5 ,6)       
+4:(6 ,4)(5 ,6)
 
 5:(0 ,3)(2 ,8)(6 ,2)(4 ,6)
 
-6:(3 ,1)(5 ,2)(4 ,4)    
+6:(3 ,1)(5 ,2)(4 ,4)
 
 */
